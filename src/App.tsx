@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Welcome from './pages/Welcome';
+import Dashboard from './pages/Dashboard';
 
 interface RouteGuardProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ function PublicRoute({ children }: RouteGuardProps) {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
-    return <Navigate to="/welcome" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;
@@ -50,10 +50,10 @@ export default function App() {
           }
         />
         <Route
-          path="/welcome"
+          path="/dashboard"
           element={
             <ProtectedRoute>
-              <Welcome />
+              <Dashboard />
             </ProtectedRoute>
           }
         />

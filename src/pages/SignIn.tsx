@@ -38,7 +38,7 @@ export default function SignIn() {
         username: response.username,
         image: response.image,
       });
-      navigate('/welcome');
+      navigate('/dashboard');
     } catch (err: unknown) {
       console.error('Login error:', err);
       setError('Invalid username or password');
