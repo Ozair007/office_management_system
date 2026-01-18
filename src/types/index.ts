@@ -91,3 +91,10 @@ export interface UserCardProps {
 	handleEditUser: (user: ManagedUser) => void;
 	handleDeleteClick: (user: ManagedUser) => void;
 }
+
+export type ThemeMode = 'light' | 'dark';
+
+export interface ThemeContextType {
+	mode: ThemeMode;
+	toggleTheme: () => void;
+}

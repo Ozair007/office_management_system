@@ -10,6 +10,7 @@ import {
   Typography,
   Alert,
   CircularProgress,
+  Link as MuiLink,
 } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
 import { login } from '../api/auth';
@@ -52,7 +53,7 @@ export default function SignIn() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: '#f5f5f5',
+        bgcolor: 'background.default',
       }}
     >
       <Card sx={{ maxWidth: 400, width: '100%', mx: 2 }}>
@@ -102,9 +103,9 @@ export default function SignIn() {
 
           <Typography textAlign="center">
             Don't have an account?{' '}
-            <Link to="/signup" style={{ color: '#1976d2' }}>
+            <MuiLink component={Link} to="/signup">
               Sign Up
-            </Link>
+            </MuiLink>
           </Typography>
         </CardContent>
       </Card>

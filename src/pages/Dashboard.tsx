@@ -9,9 +9,11 @@ import {
   Alert,
   AppBar,
   Toolbar,
+  IconButton,
 } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
+import { Add as AddIcon, DarkMode as DarkModeIcon, LightMode as LightModeIcon } from '@mui/icons-material';
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
 import { fetchUsers } from '../api/users';
 import type { ManagedUser } from '../types';
 import { USERS_PER_PAGE } from '../constants';
@@ -21,6 +23,7 @@ import UserCard from '../components/UserCard';
 
 export default function Dashboard() {
   const { user: currentUser, logout } = useAuth();
+  const { mode, toggleTheme } = useTheme();
   const [users, setUsers] = useState<ManagedUser[]>([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [page, setPage] = useState(1);
@@ -90,12 +93,15 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             User Management
           </Typography>
+          <IconButton color="inherit" onClick={toggleTheme} sx={{ mr: 1 }}>
+            {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
           <Typography sx={{ mr: 2 }}>Hello {currentUser?.firstName}</Typography>
           <Button color="inherit" onClick={logout}>
             Sign Out
