@@ -39,7 +39,7 @@ export default function SignUp() {
         username: response.username,
         image: response?.image || '',
       });
-      navigate('/welcome');
+      navigate('/dashboard');
     } catch (error) {
       console.error('SignUp error:', error);
       setError('Registration failed. Please try again.');

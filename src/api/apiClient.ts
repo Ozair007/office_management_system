@@ -1,10 +1,9 @@
 import axios, { AxiosError } from 'axios';
 import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, AUTH_STORAGE_KEYS } from '../constants';
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_BASE_URL,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +13,7 @@ const apiClient: AxiosInstance = axios.create({
 
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN);
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -33,7 +32,7 @@ apiClient.interceptors.response.use(
     }
 
     if (status === 401) {
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN);
       window.location.href = '/signup';
     }
 
